@@ -1,11 +1,10 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Fragmentation-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5937)
-[![Build Status](https://travis-ci.org/YoKeyword/Fragmentation.svg?branch=master)](https://travis-ci.org/YoKeyword/Fragmentation)
-[![Download](https://api.bintray.com/packages/yokeyword/maven/Fragmentation/images/download.svg) ](https://bintray.com/yokeyword/maven/Fragmentation/_latestVersion)
+[![Build Status](https://github.com/JantHsueh/Fragmentation/workflows/RELEASE_CI/badge.svg?branch=androidx)](https://github.com/JantHsueh/Fragmentation/workflows/RELEASE_CI/badge.svg?branch=androidxn)
+[![Download](https://api.bintray.com/packages/jantxue/maven/Fragmentationx/images/download.svg) ](https://bintray.com/jantxue/maven/Fragmentationx/_latestVersion)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# PLEASE NOTE, THIS PROJECT IS NO LONGER BEING MAINTAINED
 ****
-### [中文版 README.md](https://github.com/YoKeyword/Fragmentation/blob/master/README_CN.md)
+### [中文版 README.md](https://github.com/JantHsueh/Fragmentation/blob/androidx/README_CN.md)
 
 # FragmentationX
 
@@ -18,7 +17,7 @@ It is designed for "Single Activity + Multi-Fragments" and "Multi-FragmentActivi
 ## Demo
 The first demo shows the basic usage of the library. The second one shows the way to implement an app which is similar to Instagram. Complicated nested fragments' usage demo are also showed.
 
-## [Download APK](https://www.pgyer.com/fragmentation)
+## [Download APK](https://github.com/JantHsueh/Fragmentation/releases)
 
 <img src="/gif/demo1.gif" width="280px"/> <img src="/gif/demo2.gif" width="280px"/>
  <img src="/gif/demo3.gif" width="280px"/>
@@ -37,26 +36,26 @@ The first demo shows the basic usage of the library. The second one shows the wa
 
 **6. Easily manage Fragment transition animations**
 
-**7. To simplify the communication between Fragment([EventBusActivityScope module](https://github.com/YoKeyword/Fragmentation/blob/master/eventbus_activity_scope/README.md))**
+**7. To simplify the communication between Fragment([EventBusActivityScope module](https://github.com/JantHsueh/Fragmentation/blob/master/eventbus_activity_scope/README.md))**
 
-**8. Support SwipeBack to pop(Fragmentation_SwipeBack module [README](https://github.com/YoKeyword/Fragmentation/blob/master/fragmentation_swipeback/README.md))**
+**8. Support SwipeBack to pop(Fragmentation_SwipeBack module [README](https://github.com/JantHsueh/Fragmentation/blob/master/fragmentation_swipeback/README.md))**
 
 <img src="/gif/stack.png" width="150px"/> <img src="/gif/log.png" width="300px"/>       <img src="/gif/SwipeBack.png" width="150px"/>
 
 ## How do I use Fragmentation?
-### Note: This is the use of androidx, if you are using the android.support, [click here `branch:master`](https://github.com/YoKeyword/Fragmentation/blob/master/README.md)
+### Note: This is the use of androidx, if you are using the android.support, [click here `branch:master`](https://github.com/JantHsueh/Fragmentation/blob/master/README.md)
 **1、build.gradle**
 ````gradle
 // This is the use of androidx, if you are using the android.support: fragmentationx -> fragmentation
-implementation 'me.yokeyword:fragmentationx:1.0.2'
+implementation 'me.xuexuan:fragmentationx:1.0.3'
 
 // If you don't want to extends SupportActivity/Fragment and would like to customize your own support, just rely on fragmentation-core
-// implementation 'me.yokeyword:fragmentationx-core:1.0.2'
+// implementation 'me.xuexuan:fragmentationx-core:1.0.3'
 
 // To get SwipeBack feature, rely on both fragmentation & fragmentation-swipeback
-implementation 'me.yokeyword:fragmentationx:1.0.2'
+implementation 'me.xuexuan:fragmentationx:1.0.3'
 // Swipeback is based on fragmentation. Refer to SwipeBackActivity/Fragment for your Customized SupportActivity/Fragment
-implementation 'me.yokeyword:fragmentationx-swipeback:1.0.2'
+implementation 'me.xuexuan:fragmentationx-swipeback:1.0.3'
 
 // To simplify the communication between Fragments.
 implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
@@ -64,7 +63,7 @@ implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
 implementation 'org.greenrobot:eventbus:{version}'
 ````
 
-**2. Activity `extends` SupportActivity or `implements` ISupportActivity：(refer to [MySupportActivity](https://github.com/YoKeyword/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportActivity.java))**
+**2. Activity `extends` SupportActivity or `implements` ISupportActivity：(refer to [MySupportActivity](https://github.com/JantHsueh/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportActivity.java))**
 ````java
 // since v1.0.0, forced extends of SupportActivity is not required, you can use interface + delegate to implement your own SupportActivity 
 public class MainActivity extends SupportActivity {
@@ -87,7 +86,7 @@ public class MainActivity extends SupportActivity {
     }
 ````
 
-**3. Fragment `extends` SupportFragment or `implements` ISupportFragment：(refer to [MySupportFragment](https://github.com/YoKeyword/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportFragment.java))：**
+**3. Fragment `extends` SupportFragment or `implements` ISupportFragment：(refer to [MySupportFragment](https://github.com/JantHsueh/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportFragment.java))：**
 ````java
 // since v1.0.0, forced extends of SupportActivity is not required, you can use interface + delegate to implement your own SupportActivity
 public class HomeFragment extends SupportFragment {
@@ -100,7 +99,7 @@ public class HomeFragment extends SupportFragment {
 }
 ````
 
-## [WIKI](https://github.com/YoKeyword/Fragmentation/wiki) , [CHANGELOG](https://github.com/YoKeyword/Fragmentation/blob/master/CHANGELOG.md)
+## [WIKI](https://github.com/JantHsueh/Fragmentation/wiki) , [CHANGELOG](https://github.com/JantHsueh/Fragmentation/blob/master/CHANGELOG.md)
 
 ## LICENSE
 ````

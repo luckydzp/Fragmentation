@@ -9,15 +9,16 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentationMagician;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import me.yokeyword.fragmentation.exception.AfterSaveStateTransactionWarning;
 import me.yokeyword.fragmentation.helper.internal.ResultRecord;
 import me.yokeyword.fragmentation.helper.internal.TransactionRecord;
@@ -585,7 +586,9 @@ class TransactionDelegate {
 
         final View fromView = from.getView();
         if (fromView == null) return;
-
+        if (fromView.getAnimation() != null){
+            fromView.clearAnimation();
+        }
         container.removeViewInLayout(fromView);
         final ViewGroup mock = addMockView(fromView, container);
 
@@ -605,11 +608,12 @@ class TransactionDelegate {
             animation = AnimationUtils.loadAnimation(mActivity, popAnim);
         }
 
-        fromView.startAnimation(animation);
+        mock.startAnimation(animation);
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 try {
+                    mock.clearAnimation();
                     mock.removeViewInLayout(fromView);
                     container.removeViewInLayout(mock);
                 } catch (Exception ignored) {
@@ -627,18 +631,22 @@ class TransactionDelegate {
         final View fromView = fromF.getView();
         if (fromView == null) return;
 
+        if (fromView.getAnimation() != null){
+            fromView.clearAnimation();
+        }
         container.removeViewInLayout(fromView);
         final ViewGroup mock = addMockView(fromView, container);
 
         to.getSupportDelegate().mEnterAnimListener = new SupportFragmentDelegate.EnterAnimListener() {
             @Override
             public void onEnterAnimStart() {
-                fromView.startAnimation(exitAnim);
 
+                mock.startAnimation(exitAnim);
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            mock.clearAnimation();
                             mock.removeViewInLayout(fromView);
                             container.removeViewInLayout(mock);
                         } catch (Exception ignored) {

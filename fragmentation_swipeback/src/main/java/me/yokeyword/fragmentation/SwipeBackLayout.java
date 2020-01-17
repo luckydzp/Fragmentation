@@ -5,12 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.FloatRange;
-import androidx.annotation.IntDef;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.core.view.ViewCompat;
-import androidx.customview.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -19,13 +13,20 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntDef;
+import androidx.core.view.ViewCompat;
+import androidx.customview.widget.ViewDragHelper;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentationMagician;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.fragment.app.FragmentationMagician;
 import me.yokeyword.fragmentation_swipeback.core.ISwipeBackActivity;
 
 /**
@@ -324,21 +325,24 @@ public class SwipeBackLayout extends FrameLayout {
 
     @Override
     public void computeScroll() {
-        mScrimOpacity = 1 - mScrollPercent;
-        if (mScrimOpacity >= 0) {
-            if (mHelper.continueSettling(true)) {
-                ViewCompat.postInvalidateOnAnimation(this);
-            }
 
-            if (mPreFragment != null && mPreFragment.getView() != null) {
-                if (mCallOnDestroyView) {
-                    mPreFragment.getView().setX(0);
-                    return;
+        if (mEnable) {
+            mScrimOpacity = 1 - mScrollPercent;
+            if (mScrimOpacity >= 0) {
+                if (mHelper.continueSettling(true)) {
+                    ViewCompat.postInvalidateOnAnimation(this);
                 }
 
-                if (mHelper.getCapturedView() != null) {
-                    int leftOffset = (int) ((mHelper.getCapturedView().getLeft() - getWidth()) * mParallaxOffset * mScrimOpacity);
-                    mPreFragment.getView().setX(leftOffset > 0 ? 0 : leftOffset);
+                if (mPreFragment != null && mPreFragment.getView() != null) {
+                    if (mCallOnDestroyView) {
+                        mPreFragment.getView().setX(0);
+                        return;
+                    }
+
+                    if (mHelper.getCapturedView() != null) {
+                        int leftOffset = (int) ((mHelper.getCapturedView().getLeft() - getWidth()) * mParallaxOffset * mScrimOpacity);
+                        mPreFragment.getView().setX(leftOffset > 0 ? 0 : leftOffset);
+                    }
                 }
             }
         }

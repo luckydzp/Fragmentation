@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -22,12 +22,12 @@ dependencies {
 }
 
 //publish {
-//    artifactId = 'fragmentation-core'
+//    artifactId = 'fragmentationx-core'
 //    userOrg = rootProject.userOrg
 //    groupId = rootProject.groupId
-//    uploadName = 'Fragmentation-Core'
+//    uploadName = 'Fragmentationx-Core'
 //    publishVersion = rootProject.publishVersion
-//    description = rootProject.desc
+//    desc = rootProject.desc
 //    website = rootProject.website
 //    licences = rootProject.licences
 //}

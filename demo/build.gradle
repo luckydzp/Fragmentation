@@ -14,28 +14,16 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
-        applicationId "me.yokeyword.sample"
+        applicationId "me.xuexuan.fragmentation"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName gitLatestTag()
     }
 
-    signingConfigs {
-        releaseConfig {
-            storeFile file("./fragmentation.jks")
-            storePassword System.getenv("KEYSTORE_PASS")
-            keyAlias System.getenv("ALIAS_NAME")
-            keyPassword System.getenv("ALIAS_PASS")
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
-
-            signingConfig signingConfigs.releaseConfig
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

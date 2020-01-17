@@ -1,9 +1,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Fragmentation-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5937)
-[![Build Status](https://travis-ci.org/YoKeyword/Fragmentation.svg?branch=master)](https://travis-ci.org/YoKeyword/Fragmentation)
-[![Download](https://api.bintray.com/packages/yokeyword/maven/Fragmentationx/images/download.svg) ](https://bintray.com/yokeyword/maven/Fragmentationx/_latestVersion)
+[![Build Status](https://github.com/JantHsueh/Fragmentation/workflows/RELEASE_CI/badge.svg?branch=androidx)](https://github.com/JantHsueh/Fragmentation/workflows/RELEASE_CI/badge.svg?branch=androidxn)
+[![Download](https://api.bintray.com/packages/jantxue/maven/Fragmentationx/images/download.svg) ](https://bintray.com/jantxue/maven/Fragmentationx/_latestVersion)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-
-# 注意：该项目不再维护
 
 
 # FragmentationX
@@ -24,8 +22,7 @@ A powerful library that manage Fragment for Android!
 # Demo演示：
 均为单Activity + 多Fragment，第一个为简单流式demo，第二个为仿微信交互的demo(全页面支持滑动退出)，第三个为仿知乎交互的复杂嵌套demo
 
-## [下载APK](https://www.pgyer.com/fragmentation)
-
+## [下载APK](https://github.com/JantHsueh/Fragmentation/releases)
 
 <img src="/gif/demo1.gif" width="280px"/> <img src="/gif/demo2.gif" width="280px"/>
  <img src="/gif/demo3.gif" width="280px"/>
@@ -44,27 +41,27 @@ A powerful library that manage Fragment for Android!
 
 6、**提供 Fragment转场动画 系列解决方案，动态改变动画**
 
-7、**提供Activity作用域的EventBus辅助类，Fragment通信更简单、独立(需要使用[EventBusActivityScope库](https://github.com/YoKeyword/Fragmentation/blob/master/eventbus_activity_scope/README.md))**
+7、**提供Activity作用域的EventBus辅助类，Fragment通信更简单、独立(需要使用[EventBusActivityScope库](https://github.com/JantHsueh/Fragmentation/blob/master/eventbus_activity_scope/README.md))**
 
-8、**支持SwipeBack滑动边缘退出(需要使用[Fragmentation_SwipeBack库](https://github.com/YoKeyword/Fragmentation/blob/master/fragmentation_swipeback/README.md))**
+8、**支持SwipeBack滑动边缘退出(需要使用[Fragmentation_SwipeBack库](https://github.com/JantHsueh/Fragmentation/blob/master/fragmentation_swipeback/README.md))**
 
 <img src="/gif/stack.png" width="150px"/> <img src="/gif/log.png" width="300px"/>     <img src="/gif/SwipeBack.png" width="150px"/>
 
 # 如何使用
-### 注意：以下为androidx的使用方式，如果使用的是android.support包，[点击这里`master`分支](https://github.com/YoKeyword/Fragmentation/blob/master/README_CN.md)
+### 注意：以下为androidx的使用方式，如果使用的是android.support包，[点击这里`master`分支](https://github.com/JantHsueh/Fragmentation/blob/master/README_CN.md)
 **1. 项目下app的build.gradle中依赖：**
 
 ````gradle
 // 以下为androidx的使用方式，如果使用的是android.support包，fragmentationx -> fragmentation 即可
-implementation 'me.yokeyword:fragmentationx:1.0.2'
+implementation 'me.xuexuan:fragmentationx:1.0.3'
 
 // 如果不想继承SupportActivity/Fragment，自己定制Support，可仅依赖:
-// implementation 'me.yokeyword:fragmentationx-core:1.0.2'
+// implementation 'me.xuexuan:fragmentationx-core:1.0.3'
 
 // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，完整的添加规则如下：
-implementation 'me.yokeyword:fragmentationx:1.0.2'
+implementation 'me.xuexuan:fragmentationx:1.0.3'
 // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
-implementation 'me.yokeyword:fragmentationx-swipeback:1.0.2'
+implementation 'me.xuexuan:fragmentationx-swipeback:1.0.3'
 
 // Activity作用域的EventBus，通信更安全
 implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
@@ -72,7 +69,7 @@ implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
 implementation 'org.greenrobot:eventbus:{version}'
 ````
 
-**2. Activity `extends` SupportActivity或者 `implements` ISupportActivity：(实现方式可参考[MySupportActivity](https://github.com/YoKeyword/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportActivity.java))**
+**2. Activity `extends` SupportActivity或者 `implements` ISupportActivity：(实现方式可参考[MySupportActivity](https://github.com/JantHsueh/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportActivity.java))**
 ````java
 // v1.0.0开始，不强制继承SupportActivity，可使用接口＋委托形式来实现自己的SupportActivity
 public class MainActivity extends SupportActivity {
@@ -95,7 +92,7 @@ public class MainActivity extends SupportActivity {
     }
 ````
 
-**3. Fragment `extends` SupportFragment或者 `implements` ISupportFragment：(实现方式可参考[MySupportFragment](https://github.com/YoKeyword/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportFragment.java))：**
+**3. Fragment `extends` SupportFragment或者 `implements` ISupportFragment：(实现方式可参考[MySupportFragment](https://github.com/JantHsueh/Fragmentation/blob/master/demo/src/main/java/me/yokeyword/sample/demo_flow/base/MySupportFragment.java))：**
 ````java
 // v1.0.0开始，不强制继承SupportFragment，可使用接口＋委托形式来实现自己的SupportFragment
 public class HomeFragment extends SupportFragment {
@@ -108,7 +105,7 @@ public class HomeFragment extends SupportFragment {
 }
 ````
 
-## [进一步使用、ChangeLog，查看wiki](https://github.com/YoKeyword/Fragmentation/wiki)
+## [进一步使用、ChangeLog，查看wiki](https://github.com/JantHsueh/Fragmentation/wiki)
 
 ## LICENSE
 ````

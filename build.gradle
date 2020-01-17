@@ -6,8 +6,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:3.5.2'
+//        classpath 'com.novoda:bintray-release:0.9.2'
     }
 }
 
@@ -28,4 +28,12 @@ ext {
     targetSdkVersion = compileSdkVersion
 
     appCompatVersion = "1.1.0-alpha01"
+
+//    userOrg = "jantxue"
+//    groupId = "me.xuexuan"
+//    publishVersion = "1.0.3"
+//    desc = "A powerful library that manage Fragment for Android"
+//    website = "https://github.com/JantHsueh/Fragmentation"
+//    licences = ['Apache-2.0']
+
 }
