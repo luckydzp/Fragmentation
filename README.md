@@ -47,15 +47,15 @@ The first demo shows the basic usage of the library. The second one shows the wa
 **1、build.gradle**
 ````gradle
 // This is the use of androidx, if you are using the android.support: fragmentationx -> fragmentation
-implementation 'me.xuexuan:fragmentationx:1.0.3'
+implementation 'me.xuexuan:fragmentationx:1.0.4'
 
 // If you don't want to extends SupportActivity/Fragment and would like to customize your own support, just rely on fragmentation-core
-// implementation 'me.xuexuan:fragmentationx-core:1.0.3'
+// implementation 'me.xuexuan:fragmentationx-core:1.0.4'
 
 // To get SwipeBack feature, rely on both fragmentation & fragmentation-swipeback
-implementation 'me.xuexuan:fragmentationx:1.0.3'
+implementation 'me.xuexuan:fragmentationx:1.0.4'
 // Swipeback is based on fragmentation. Refer to SwipeBackActivity/Fragment for your Customized SupportActivity/Fragment
-implementation 'me.xuexuan:fragmentationx-swipeback:1.0.3'
+implementation 'me.xuexuan:fragmentationx-swipeback:1.0.4'
 
 // To simplify the communication between Fragments.
 implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
