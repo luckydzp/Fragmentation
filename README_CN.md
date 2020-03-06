@@ -48,20 +48,23 @@ A powerful library that manage Fragment for Android!
 <img src="/gif/stack.png" width="150px"/> <img src="/gif/log.png" width="300px"/>     <img src="/gif/SwipeBack.png" width="150px"/>
 
 # 如何使用
+
+## [文档](https://github.com/JantHsueh/Fragmentation/wiki)
+
 ### 注意：以下为androidx的使用方式，如果使用的是android.support包，[点击这里`master`分支](https://github.com/JantHsueh/Fragmentation/blob/master/README_CN.md)
 **1. 项目下app的build.gradle中依赖：**
 
 ````gradle
 // 以下为androidx的使用方式，如果使用的是android.support包，fragmentationx -> fragmentation 即可
-implementation 'me.xuexuan:fragmentationx:1.0.3'
+implementation 'me.xuexuan:fragmentationx:1.0.5'
 
 // 如果不想继承SupportActivity/Fragment，自己定制Support，可仅依赖:
-// implementation 'me.xuexuan:fragmentationx-core:1.0.3'
+// implementation 'me.xuexuan:fragmentationx-core:1.0.5'
 
 // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，完整的添加规则如下：
-implementation 'me.xuexuan:fragmentationx:1.0.3'
+implementation 'me.xuexuan:fragmentationx:1.0.5'
 // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
-implementation 'me.xuexuan:fragmentationx-swipeback:1.0.3'
+implementation 'me.xuexuan:fragmentationx-swipeback:1.0.5'
 
 // Activity作用域的EventBus，通信更安全
 implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
@@ -105,7 +108,6 @@ public class HomeFragment extends SupportFragment {
 }
 ````
 
-## [进一步使用、ChangeLog，查看wiki](https://github.com/JantHsueh/Fragmentation/wiki)
 
 ## LICENSE
 ````

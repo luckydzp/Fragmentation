@@ -43,19 +43,22 @@ The first demo shows the basic usage of the library. The second one shows the wa
 <img src="/gif/stack.png" width="150px"/> <img src="/gif/log.png" width="300px"/>       <img src="/gif/SwipeBack.png" width="150px"/>
 
 ## How do I use Fragmentation?
+
+## [文档](https://github.com/JantHsueh/Fragmentation/wiki)
+
 ### Note: This is the use of androidx, if you are using the android.support, [click here `branch:master`](https://github.com/JantHsueh/Fragmentation/blob/master/README.md)
 **1、build.gradle**
 ````gradle
 // This is the use of androidx, if you are using the android.support: fragmentationx -> fragmentation
-implementation 'me.xuexuan:fragmentationx:1.0.4'
+implementation 'me.xuexuan:fragmentationx:1.0.5'
 
 // If you don't want to extends SupportActivity/Fragment and would like to customize your own support, just rely on fragmentation-core
-// implementation 'me.xuexuan:fragmentationx-core:1.0.4'
+// implementation 'me.xuexuan:fragmentationx-core:1.0.5'
 
 // To get SwipeBack feature, rely on both fragmentation & fragmentation-swipeback
-implementation 'me.xuexuan:fragmentationx:1.0.4'
+implementation 'me.xuexuan:fragmentationx:1.0.5'
 // Swipeback is based on fragmentation. Refer to SwipeBackActivity/Fragment for your Customized SupportActivity/Fragment
-implementation 'me.xuexuan:fragmentationx-swipeback:1.0.4'
+implementation 'me.xuexuan:fragmentationx-swipeback:1.0.5'
 
 // To simplify the communication between Fragments.
 implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
@@ -99,7 +102,6 @@ public class HomeFragment extends SupportFragment {
 }
 ````
 
-## [WIKI](https://github.com/JantHsueh/Fragmentation/wiki) , [CHANGELOG](https://github.com/JantHsueh/Fragmentation/blob/master/CHANGELOG.md)
 
 ## LICENSE
 ````
