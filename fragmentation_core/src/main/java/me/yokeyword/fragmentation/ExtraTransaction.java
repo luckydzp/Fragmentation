@@ -1,13 +1,14 @@
 package me.yokeyword.fragmentation;
 
 import android.os.Build;
+import android.view.View;
+
 import androidx.annotation.AnimRes;
 import androidx.annotation.AnimatorRes;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import android.view.View;
 
 import java.util.ArrayList;
 
@@ -98,6 +99,8 @@ public abstract class ExtraTransaction {
 
     /**
      * Don't add this extraTransaction to the back stack.
+     * If you use this function to don't add to BackStack , then you must call {@link DontAddToBackStackTransaction#remove(ISupportFragment, boolean)} when leaving the fragment.
+     *
      */
     public abstract DontAddToBackStackTransaction dontAddToBackStack();
 

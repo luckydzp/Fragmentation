@@ -148,7 +148,7 @@ public class DebugStackDelegate implements SensorEventListener {
     private List<DebugFragmentRecord> getFragmentRecords() {
         List<DebugFragmentRecord> fragmentRecordList = new ArrayList<>();
 
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(mActivity.getSupportFragmentManager());
+        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(mActivity.getSupportFragmentManager());
 
         if (fragmentList == null || fragmentList.size() < 1) return null;
 
@@ -183,7 +183,7 @@ public class DebugStackDelegate implements SensorEventListener {
     private List<DebugFragmentRecord> getChildFragmentRecords(Fragment parentFragment) {
         List<DebugFragmentRecord> fragmentRecords = new ArrayList<>();
 
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(parentFragment.getChildFragmentManager());
+        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(parentFragment.getChildFragmentManager());
         if (fragmentList == null || fragmentList.size() < 1) return null;
 
         for (int i = fragmentList.size() - 1; i >= 0; i--) {

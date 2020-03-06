@@ -2,15 +2,16 @@ package me.yokeyword.sample.demo_wechat.ui.fragment.first;
 
 import android.graphics.Rect;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
+import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.sample.R;
 import me.yokeyword.sample.demo_wechat.adapter.ChatAdapter;
-import me.yokeyword.sample.demo_wechat.base.BaseMainFragment;
 import me.yokeyword.sample.demo_wechat.entity.Chat;
 import me.yokeyword.sample.demo_wechat.event.TabSelectedEvent;
 import me.yokeyword.sample.demo_wechat.listener.OnItemClickListener;
@@ -29,7 +30,7 @@ import me.yokeyword.sample.demo_wechat.ui.fragment.MainFragment;
 /**
  * Created by YoKeyword on 16/6/30.
  */
-public class WechatFirstTabFragment extends BaseMainFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class WechatFirstTabFragment extends SupportFragment implements SwipeRefreshLayout.OnRefreshListener {
     private Toolbar mToolbar;
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecy;

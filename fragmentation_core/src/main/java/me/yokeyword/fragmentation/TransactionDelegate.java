@@ -214,6 +214,7 @@ class TransactionDelegate {
 
     /**
      * Remove
+     * Only allowed in interfaces  {@link ExtraTransaction.DontAddToBackStackTransaction#remove(ISupportFragment, boolean)}
      */
     void remove(final FragmentManager fm, final Fragment fragment, final boolean showPreFragment) {
         enqueue(fm, new Action(Action.ACTION_POP, fm) {
@@ -454,7 +455,7 @@ class TransactionDelegate {
         FragmentTransaction ft = fm.beginTransaction().show((Fragment) showFragment);
 
         if (hideFragment == null) {
-            List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fm);
+            List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fm);
             if (fragmentList != null) {
                 for (Fragment fragment : fragmentList) {
                     if (fragment != null && fragment != showFragment) {

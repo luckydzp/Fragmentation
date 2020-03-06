@@ -77,7 +77,7 @@ public class SupportActivityDelegate {
     public void setFragmentAnimator(FragmentAnimator fragmentAnimator) {
         this.mFragmentAnimator = fragmentAnimator;
 
-        for (Fragment fragment : FragmentationMagician.getActiveFragments(getSupportFragmentManager())) {
+        for (Fragment fragment : FragmentationMagician.getAddedFragments(getSupportFragmentManager())) {
             if (fragment instanceof ISupportFragment) {
                 ISupportFragment iF = (ISupportFragment) fragment;
                 SupportFragmentDelegate delegate = iF.getSupportDelegate();
@@ -154,7 +154,7 @@ public class SupportActivityDelegate {
                 }
 
                 // 获取activeFragment:即从栈顶开始 状态为show的那个Fragment
-                ISupportFragment activeFragment = SupportHelper.getActiveFragment(getSupportFragmentManager());
+                ISupportFragment activeFragment = SupportHelper.getAddedFragment(getSupportFragmentManager());
                 if (mTransactionDelegate.dispatchBackPressedEvent(activeFragment)) return;
 
                 mSupport.onBackPressedSupport();

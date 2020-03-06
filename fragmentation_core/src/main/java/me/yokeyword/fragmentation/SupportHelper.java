@@ -67,7 +67,7 @@ public class SupportHelper {
     }
 
     public static ISupportFragment getTopFragment(FragmentManager fragmentManager, int containerId) {
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
+        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
         if (fragmentList == null) return null;
 
         for (int i = fragmentList.size() - 1; i >= 0; i--) {
@@ -93,7 +93,7 @@ public class SupportHelper {
         FragmentManager fragmentManager = fragment.getFragmentManager();
         if (fragmentManager == null) return null;
 
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
+        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
         if (fragmentList == null) return null;
 
         int index = fragmentList.indexOf(fragment);
@@ -112,7 +112,7 @@ public class SupportHelper {
      */
     @SuppressWarnings("unchecked")
     public static <T extends ISupportFragment> T findFragment(FragmentManager fragmentManager, Class<T> fragmentClass) {
-        return findStackFragment(fragmentClass, null, fragmentManager);
+        return findAddedFragment(fragmentClass, null, fragmentManager);
     }
 
     /**
@@ -122,22 +122,22 @@ public class SupportHelper {
      */
     @SuppressWarnings("unchecked")
     public static <T extends ISupportFragment> T findFragment(FragmentManager fragmentManager, String fragmentTag) {
-        return findStackFragment(null, fragmentTag, fragmentManager);
+        return findAddedFragment(null, fragmentTag, fragmentManager);
     }
 
     /**
      * 从栈顶开始，寻找FragmentManager以及其所有子栈, 直到找到状态为show & userVisible的Fragment
      */
-    public static ISupportFragment getActiveFragment(FragmentManager fragmentManager) {
-        return getActiveFragment(fragmentManager, null);
+    public static ISupportFragment getAddedFragment(FragmentManager fragmentManager) {
+        return getAddedFragment(fragmentManager, null);
     }
 
     @SuppressWarnings("unchecked")
-    static <T extends ISupportFragment> T findStackFragment(Class<T> fragmentClass, String toFragmentTag, FragmentManager fragmentManager) {
+    static <T extends ISupportFragment> T findAddedFragment(Class<T> fragmentClass, String toFragmentTag, FragmentManager fragmentManager) {
         Fragment fragment = null;
 
         if (toFragmentTag == null) {
-            List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
+            List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
             if (fragmentList == null) return null;
 
             int sizeChildFrgList = fragmentList.size();
@@ -156,16 +156,16 @@ public class SupportHelper {
         return (T) fragment;
     }
 
-    private static ISupportFragment getActiveFragment(FragmentManager fragmentManager, ISupportFragment parentFragment) {
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fragmentManager);
-        if (fragmentList == null) {
+    private static ISupportFragment getAddedFragment(FragmentManager fragmentManager, ISupportFragment parentFragment) {
+        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
+        if (fragmentList.size() == 0) {
             return parentFragment;
         }
         for (int i = fragmentList.size() - 1; i >= 0; i--) {
             Fragment fragment = fragmentList.get(i);
             if (fragment instanceof ISupportFragment) {
                 if (fragment.isResumed() && !fragment.isHidden() && fragment.getUserVisibleHint()) {
-                    return getActiveFragment(fragment.getChildFragmentManager(), (ISupportFragment) fragment);
+                    return getAddedFragment(fragment.getChildFragmentManager(), (ISupportFragment) fragment);
                 }
             }
         }
@@ -200,6 +200,27 @@ public class SupportHelper {
         return null;
     }
 
+
+    /**
+     * Get the first Fragment from added list
+     */
+    public static ISupportFragment getAddedFirstFragment(FragmentManager fragmentManager) {
+        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
+        if (fragmentList.size() == 0) {
+            return null;
+        }
+
+        Fragment fragment = fragmentList.get(0);
+        if (fragment instanceof ISupportFragment) {
+            if (fragment.isResumed() && !fragment.isHidden() && fragment.getUserVisibleHint()) {
+                return (ISupportFragment) fragment;
+            }
+        }
+
+        return null;
+    }
+
+
     @SuppressWarnings("unchecked")
     static <T extends ISupportFragment> T findBackStackFragment(Class<T> fragmentClass, String toFragmentTag, FragmentManager fragmentManager) {
         int count = fragmentManager.getBackStackEntryCount();
@@ -225,7 +246,7 @@ public class SupportHelper {
         Fragment target = fm.findFragmentByTag(targetTag);
         List<Fragment> willPopFragments = new ArrayList<>();
 
-        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(fm);
+        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fm);
         if (fragmentList == null) return willPopFragments;
 
         int size = fragmentList.size();

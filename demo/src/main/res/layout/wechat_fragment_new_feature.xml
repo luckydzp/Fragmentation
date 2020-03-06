@@ -16,7 +16,7 @@
             android:layout_marginBottom="4dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="15dp"
             android:text="@string/new_tip_start"
             android:textColor="@android:color/black"/>
 
@@ -86,6 +86,32 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:text="dialogFragment.show(..)"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Start a Fragment that don't add to backstack"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:text="extraTransaction()\n.setCustomAnimations(enter,exit...)\n.dontAddToBackStack()\n.startDontHideSelf()"/>
+
+        <Button
+            android:id="@+id/btn_dont_add_stack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="dontAddToBackStack start()"
             android:textAllCaps="false"/>
 
     </LinearLayout>

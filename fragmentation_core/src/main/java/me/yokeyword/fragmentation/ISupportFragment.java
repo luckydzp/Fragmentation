@@ -32,8 +32,6 @@ public interface ISupportFragment {
 
     ExtraTransaction extraTransaction();
 
-    void enqueueAction(Runnable runnable);
-
     void post(Runnable runnable);
 
     void onEnterAnimationEnd(@Nullable Bundle savedInstanceState);

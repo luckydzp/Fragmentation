@@ -449,7 +449,7 @@ public class SwipeBackLayout extends FrameLayout {
 
                 if (mPreFragment == null) {
                     if (mFragment != null) {
-                        List<Fragment> fragmentList = FragmentationMagician.getActiveFragments(((Fragment) mFragment).getFragmentManager());
+                        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(((Fragment) mFragment).getFragmentManager());
                         if (fragmentList != null && fragmentList.size() > 1) {
                             int index = fragmentList.indexOf(mFragment);
                             for (int i = index - 1; i >= 0; i--) {

@@ -1,22 +1,24 @@
 package me.yokeyword.sample.demo_wechat.ui.fragment.second;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
+import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.sample.R;
 import me.yokeyword.sample.demo_wechat.adapter.WechatPagerFragmentAdapter;
-import me.yokeyword.sample.demo_wechat.base.BaseMainFragment;
 
 /**
  * Created by YoKeyword on 16/6/30.
  */
-public class WechatSecondTabFragment extends BaseMainFragment {
+public class WechatSecondTabFragment extends SupportFragment {
     private TabLayout mTab;
     private Toolbar mToolbar;
     private ViewPager mViewPager;

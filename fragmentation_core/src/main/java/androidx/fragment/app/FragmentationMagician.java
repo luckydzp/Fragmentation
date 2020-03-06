@@ -80,7 +80,7 @@ public class FragmentationMagician {
         });
     }
 
-    public static List<Fragment> getActiveFragments(FragmentManager fragmentManager) {
+    public static List<Fragment> getAddedFragments(FragmentManager fragmentManager) {
         return fragmentManager.getFragments();
     }
 

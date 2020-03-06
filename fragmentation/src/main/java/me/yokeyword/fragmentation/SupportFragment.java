@@ -1,13 +1,14 @@
 package me.yokeyword.fragmentation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import android.view.View;
 import android.view.animation.Animation;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
@@ -36,9 +37,9 @@ public class SupportFragment extends Fragment implements ISupportFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mDelegate.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mDelegate.onAttach();
         _mActivity = (SupportActivity) mDelegate.getActivity();
     }
 
@@ -101,20 +102,6 @@ public class SupportFragment extends Fragment implements ISupportFragment {
         mDelegate.setUserVisibleHint(isVisibleToUser);
     }
 
-    /**
-     * Causes the Runnable r to be added to the action queue.
-     * <p>
-     * The runnable will be run after all the previous action has been run.
-     * <p>
-     * 前面的事务全部执行后 执行该Action
-     *
-     * @deprecated Use {@link #post(Runnable)} instead.
-     */
-    @Deprecated
-    @Override
-    public void enqueueAction(Runnable runnable) {
-        mDelegate.enqueueAction(runnable);
-    }
 
     /**
      * Causes the Runnable r to be added to the action queue.

@@ -1,14 +1,16 @@
 package me.yokeyword.sample.demo_wechat.ui.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+
 import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.sample.R;
+import me.yokeyword.sample.demo_wechat.base.BaseMainFragment;
 import me.yokeyword.sample.demo_wechat.event.TabSelectedEvent;
 import me.yokeyword.sample.demo_wechat.ui.fragment.first.WechatFirstTabFragment;
 import me.yokeyword.sample.demo_wechat.ui.fragment.second.WechatSecondTabFragment;
@@ -19,7 +21,7 @@ import me.yokeyword.sample.demo_wechat.ui.view.BottomBarTab;
 /**
  * Created by YoKeyword on 16/6/30.
  */
-public class MainFragment extends SupportFragment {
+public class MainFragment extends BaseMainFragment {
     private static final int REQ_MSG = 10;
 
     public static final int FIRST = 0;

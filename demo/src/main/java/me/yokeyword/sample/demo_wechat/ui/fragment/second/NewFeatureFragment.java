@@ -1,11 +1,12 @@
 package me.yokeyword.sample.demo_wechat.ui.fragment.second;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 
 import me.yokeyword.sample.R;
 import me.yokeyword.sample.demo_wechat.base.BaseBackFragment;
@@ -61,6 +62,20 @@ public class NewFeatureFragment extends BaseBackFragment {
                 dialogFragment.show(getFragmentManager(), getClass().getSimpleName());
             }
         });
+
+
+        // 启动一个Fragment,不加入backstack
+        view.findViewById(R.id.btn_dont_add_stack).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                extraTransaction()
+                        .setCustomAnimations(R.anim.v_fragment_enter, R.anim.v_fragment_pop_exit,
+                                R.anim.v_fragment_pop_enter, R.anim.v_fragment_exit)
+                        .dontAddToBackStack()
+                        .start(DontAddStackFragment.newInstance());
+            }
+        });
+
 
         return attachToSwipeBack(view);
     }

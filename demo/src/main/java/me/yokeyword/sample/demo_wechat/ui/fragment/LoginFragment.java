@@ -8,15 +8,15 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
-import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.sample.R;
+import me.yokeyword.sample.demo_wechat.base.BaseMainFragment;
 
 
 /**
  * create by xuexuan
  * time 2019/3/18 19:28
  */
-public class LoginFragment extends SupportFragment {
+public class LoginFragment extends BaseMainFragment {
 
     private Button  mBtnGoMain;
 

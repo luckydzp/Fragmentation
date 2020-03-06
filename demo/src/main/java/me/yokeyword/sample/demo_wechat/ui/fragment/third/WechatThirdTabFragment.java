@@ -1,20 +1,21 @@
 package me.yokeyword.sample.demo_wechat.ui.fragment.third;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.sample.R;
 import me.yokeyword.sample.demo_wechat.adapter.HomeAdapter;
-import me.yokeyword.sample.demo_wechat.base.BaseMainFragment;
 import me.yokeyword.sample.demo_wechat.entity.Article;
 import me.yokeyword.sample.demo_wechat.listener.OnItemClickListener;
 import me.yokeyword.sample.demo_wechat.ui.fragment.MainFragment;
@@ -22,7 +23,7 @@ import me.yokeyword.sample.demo_wechat.ui.fragment.MainFragment;
 /**
  * Created by YoKeyword on 16/6/30.
  */
-public class WechatThirdTabFragment extends BaseMainFragment {
+public class WechatThirdTabFragment extends SupportFragment {
     private RecyclerView mRecy;
     private Toolbar mToolbar;
     private HomeAdapter mAdapter;

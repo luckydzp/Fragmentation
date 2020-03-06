@@ -3,13 +3,14 @@ package me.yokeyword.fragmentation.helper.internal;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentationMagician;
 
 import java.util.List;
 
-import androidx.fragment.app.FragmentationMagician;
 import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
@@ -67,9 +68,8 @@ public class VisibleDelegate {
     }
 
     private void initVisible() {
-        if (!mInvisibleWhenLeave && !mFragment.isHidden() && mFragment.getUserVisibleHint()) {
-            if ((mFragment.getParentFragment() != null && isFragmentVisible(mFragment.getParentFragment()))
-                    || mFragment.getParentFragment() == null) {
+        if (!mInvisibleWhenLeave && isFragmentVisible(mFragment)) {
+            if (mFragment.getParentFragment() == null || isFragmentVisible(mFragment.getParentFragment())) {
                 mNeedDispatch = false;
                 safeDispatchUserVisibleHint(true);
             }
@@ -126,7 +126,7 @@ public class VisibleDelegate {
 
     private void dispatchChildOnFragmentShownWhenNotResumed() {
         FragmentManager fragmentManager = mFragment.getChildFragmentManager();
-        List<Fragment> childFragments = FragmentationMagician.getActiveFragments(fragmentManager);
+        List<Fragment> childFragments = FragmentationMagician.getAddedFragments(fragmentManager);
         if (childFragments != null) {
             for (Fragment child : childFragments) {
                 if (child instanceof ISupportFragment && !child.isHidden() && child.getUserVisibleHint()) {
@@ -201,7 +201,7 @@ public class VisibleDelegate {
         } else {
             if (checkAddState()) return;
             FragmentManager fragmentManager = mFragment.getChildFragmentManager();
-            List<Fragment> childFragments = FragmentationMagician.getActiveFragments(fragmentManager);
+            List<Fragment> childFragments = FragmentationMagician.getAddedFragments(fragmentManager);
             if (childFragments != null) {
                 for (Fragment child : childFragments) {
                     if (child instanceof ISupportFragment && !child.isHidden() && child.getUserVisibleHint()) {

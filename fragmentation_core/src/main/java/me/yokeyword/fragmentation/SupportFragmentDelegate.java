@@ -53,7 +53,7 @@ public class SupportFragmentDelegate {
     private ISupportFragment mSupportF;
     private Fragment mFragment;
     protected FragmentActivity _mActivity;
-    private ISupportActivity mSupport;
+    private ISupportActivity mSupportA;
     boolean mAnimByActivity = true;
     EnterAnimListener mEnterAnimListener;
 
@@ -74,16 +74,21 @@ public class SupportFragmentDelegate {
         if (mTransactionDelegate == null)
             throw new RuntimeException(mFragment.getClass().getSimpleName() + " not attach!");
 
-        return new ExtraTransaction.ExtraTransactionImpl<>((FragmentActivity) mSupport, mSupportF, mTransactionDelegate, false);
+        return new ExtraTransaction.ExtraTransactionImpl<>((FragmentActivity) mSupportA, mSupportF, mTransactionDelegate, false);
     }
 
-    public void onAttach(Activity activity) {
+    public void onAttach() {
+        FragmentActivity activity = mFragment.getActivity();
         if (activity instanceof ISupportActivity) {
-            this.mSupport = (ISupportActivity) activity;
-            this._mActivity = (FragmentActivity) activity;
-            mTransactionDelegate = mSupport.getSupportDelegate().getTransactionDelegate();
+            this.mSupportA = (ISupportActivity) activity;
+            this._mActivity = activity;
+            mTransactionDelegate = mSupportA.getSupportDelegate().getTransactionDelegate();
         } else {
-            throw new RuntimeException(activity.getClass().getSimpleName() + " must impl ISupportActivity!");
+            if (activity != null) {
+                throw new RuntimeException(activity.getClass().getSimpleName() + " must impl ISupportActivity!");
+            } else {
+                throw new RuntimeException("fragment attached activity must not be null");
+            }
         }
     }
 
@@ -120,12 +125,12 @@ public class SupportFragmentDelegate {
 
             @Override
             public void onAnimationStart(Animation animation) {
-                mSupport.getSupportDelegate().mFragmentClickable = false;  // 开启防抖动
+                mSupportA.getSupportDelegate().mFragmentClickable = false;  // 开启防抖动
 
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mSupport.getSupportDelegate().mFragmentClickable = true;
+                        mSupportA.getSupportDelegate().mFragmentClickable = true;
                     }
                 }, enter.getDuration());
             }
@@ -142,7 +147,7 @@ public class SupportFragmentDelegate {
     }
 
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if ((mSupport.getSupportDelegate().mPopMultipleNoAnim || mLockAnim)) {
+        if ((mSupportA.getSupportDelegate().mPopMultipleNoAnim || mLockAnim)) {
             if (transit == FragmentTransaction.TRANSIT_FRAGMENT_CLOSE && enter) {
                 return mAnimHelper.getNoneAnimFixed();
             }
@@ -218,7 +223,7 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroyView() {
-        mSupport.getSupportDelegate().mFragmentClickable = true;
+        mSupportA.getSupportDelegate().mFragmentClickable = true;
         getVisibleDelegate().onDestroyView();
         getHandler().removeCallbacks(mNotifyEnterAnimEndRunnable);
     }
@@ -233,20 +238,6 @@ public class SupportFragmentDelegate {
 
     public void setUserVisibleHint(boolean isVisibleToUser) {
         getVisibleDelegate().setUserVisibleHint(isVisibleToUser);
-    }
-
-    /**
-     * Causes the Runnable r to be added to the action queue.
-     * <p>
-     * The runnable will be run after all the previous action has been run.
-     * <p>
-     * 前面的事务全部执行后 执行该Action
-     *
-     * @deprecated Use {@link #post(Runnable)} instead.
-     */
-    @Deprecated
-    public void enqueueAction(Runnable runnable) {
-        post(runnable);
     }
 
     /**
@@ -305,7 +296,7 @@ public class SupportFragmentDelegate {
      * 设定当前Fragmemt动画,优先级比在ISupportActivity里高
      */
     public FragmentAnimator onCreateFragmentAnimator() {
-        return mSupport.getFragmentAnimator();
+        return mSupportA.getFragmentAnimator();
     }
 
     /**
@@ -314,13 +305,13 @@ public class SupportFragmentDelegate {
      * @return FragmentAnimator
      */
     public FragmentAnimator getFragmentAnimator() {
-        if (mSupport == null)
+        if (mSupportA == null)
             throw new RuntimeException("Fragment has not been attached to Activity!");
 
         if (mFragmentAnimator == null) {
             mFragmentAnimator = mSupportF.onCreateFragmentAnimator();
             if (mFragmentAnimator == null) {
-                mFragmentAnimator = mSupport.getFragmentAnimator();
+                mFragmentAnimator = mSupportA.getFragmentAnimator();
             }
         }
         return mFragmentAnimator;
@@ -568,7 +559,7 @@ public class SupportFragmentDelegate {
     private void fixAnimationListener(Animation enterAnim) {
         // AnimationListener is not reliable.
         getHandler().postDelayed(mNotifyEnterAnimEndRunnable, enterAnim.getDuration());
-        mSupport.getSupportDelegate().mFragmentClickable = true;
+        mSupportA.getSupportDelegate().mFragmentClickable = true;
 
         if (mEnterAnimListener != null) {
             getHandler().post(new Runnable() {
@@ -616,7 +607,7 @@ public class SupportFragmentDelegate {
             return;
         }
 
-        int defaultBg = mSupport.getSupportDelegate().getDefaultFragmentBackground();
+        int defaultBg = mSupportA.getSupportDelegate().getDefaultFragmentBackground();
         if (defaultBg == 0) {
             int background = getWindowBackground();
             view.setBackgroundResource(background);
@@ -636,7 +627,7 @@ public class SupportFragmentDelegate {
 
     private void notifyEnterAnimEnd() {
         getHandler().post(mNotifyEnterAnimEndRunnable);
-        mSupport.getSupportDelegate().mFragmentClickable = true;
+        mSupportA.getSupportDelegate().mFragmentClickable = true;
     }
 
     private Handler getHandler() {
