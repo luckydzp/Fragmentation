@@ -13,6 +13,7 @@ android {
 dependencies {
     compileOnly "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     api project(':fragmentation_core')
+//    api 'me.xuexuan:fragmentationx-core:1.0.6'
 }
 
 
