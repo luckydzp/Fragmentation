@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentationMagician;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class SupportHelper {
     }
 
     public static ISupportFragment getTopFragment(FragmentManager fragmentManager, int containerId) {
-        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
+        List<Fragment> fragmentList = fragmentManager.getFragments();
         if (fragmentList == null) return null;
 
         for (int i = fragmentList.size() - 1; i >= 0; i--) {
@@ -93,7 +92,7 @@ public class SupportHelper {
         FragmentManager fragmentManager = fragment.getFragmentManager();
         if (fragmentManager == null) return null;
 
-        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
+        List<Fragment> fragmentList = fragmentManager.getFragments();
         if (fragmentList == null) return null;
 
         int index = fragmentList.indexOf(fragment);
@@ -137,7 +136,7 @@ public class SupportHelper {
         Fragment fragment = null;
 
         if (toFragmentTag == null) {
-            List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
+            List<Fragment> fragmentList = fragmentManager.getFragments();
             if (fragmentList == null) return null;
 
             int sizeChildFrgList = fragmentList.size();
@@ -157,7 +156,7 @@ public class SupportHelper {
     }
 
     private static ISupportFragment getAddedFragment(FragmentManager fragmentManager, ISupportFragment parentFragment) {
-        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
+        List<Fragment> fragmentList = fragmentManager.getFragments();
         if (fragmentList.size() == 0) {
             return parentFragment;
         }
@@ -205,7 +204,7 @@ public class SupportHelper {
      * Get the first Fragment from added list
      */
     public static ISupportFragment getAddedFirstFragment(FragmentManager fragmentManager) {
-        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fragmentManager);
+        List<Fragment> fragmentList = fragmentManager.getFragments();
         if (fragmentList.size() == 0) {
             return null;
         }
@@ -246,7 +245,7 @@ public class SupportHelper {
         Fragment target = fm.findFragmentByTag(targetTag);
         List<Fragment> willPopFragments = new ArrayList<>();
 
-        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(fm);
+        List<Fragment> fragmentList = fm.getFragments();
         if (fragmentList == null) return willPopFragments;
 
         int size = fragmentList.size();

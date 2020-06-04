@@ -1,16 +1,18 @@
 package me.yokeyword.sample.demo_wechat.ui.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+
 import me.yokeyword.sample.R;
 import me.yokeyword.sample.demo_wechat.base.BaseBackFragment;
+import me.yokeyword.sample.demo_wechat.ui.fragment.second.NewFeatureFragment;
 
 /**
  * Created by YoKeyword on 16/2/7.
@@ -20,7 +22,7 @@ public class CycleFragment extends BaseBackFragment {
 
     private Toolbar mToolbar;
     private TextView mTvName;
-    private Button mBtnNext, mBtnNextWithFinish;
+    private Button mBtnNext, mBtnNextWithFinish,mBtnPopTo;
 
     private int mNumber;
 
@@ -54,6 +56,7 @@ public class CycleFragment extends BaseBackFragment {
         mTvName = (TextView) view.findViewById(R.id.tv_name);
         mBtnNext = (Button) view.findViewById(R.id.btn_next);
         mBtnNextWithFinish = (Button) view.findViewById(R.id.btn_next_with_finish);
+        mBtnPopTo = (Button) view.findViewById(R.id.btn_pop_to);
 
         String title = "CyclerFragment " + mNumber;
 
@@ -71,6 +74,12 @@ public class CycleFragment extends BaseBackFragment {
             @Override
             public void onClick(View v) {
                 startWithPop(CycleFragment.newInstance(mNumber + 1));
+            }
+        });
+        mBtnPopTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popTo(NewFeatureFragment.class,false);
             }
         });
     }

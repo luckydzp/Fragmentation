@@ -19,7 +19,6 @@ import androidx.core.view.ViewCompat;
 import androidx.customview.widget.ViewDragHelper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentationMagician;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -448,9 +447,9 @@ public class SwipeBackLayout extends FrameLayout {
                 }
 
                 if (mPreFragment == null) {
-                    if (mFragment != null) {
-                        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(((Fragment) mFragment).getFragmentManager());
-                        if (fragmentList != null && fragmentList.size() > 1) {
+                    if (mFragment != null && ((Fragment) mFragment).getFragmentManager() != null) {
+                        List<Fragment> fragmentList = ((Fragment) mFragment).getFragmentManager().getFragments();
+                        if (fragmentList.size() > 1) {
                             int index = fragmentList.indexOf(mFragment);
                             for (int i = index - 1; i >= 0; i--) {
                                 Fragment fragment = fragmentList.get(i);

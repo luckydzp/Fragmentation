@@ -31,4 +31,12 @@
         android:layout_marginTop="48dp"
         android:text="@string/start_cycler"/>
 
+    <Button
+        android:id="@+id/btn_pop_to"
+        android:layout_width="match_parent"
+        android:textAllCaps="false"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/pop_to_newfreatures_fragment"/>
+
 </LinearLayout>

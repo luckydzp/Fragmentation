@@ -19,8 +19,6 @@ public abstract class Action {
     public int action = ACTION_NORMAL;
     public long duration = 0;
 
-    public Action() {
-    }
 
     public Action(int action) {
         this.action = action;
@@ -28,6 +26,10 @@ public abstract class Action {
 
     public Action(int action, FragmentManager fragmentManager) {
         this(action);
+        this.fragmentManager = fragmentManager;
+    }
+
+    public Action(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 

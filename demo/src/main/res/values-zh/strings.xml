@@ -135,6 +135,8 @@
     <string name="btn_complicated">仿知乎交互Demo (复杂嵌套栈设计)</string>
 
     <string name="start_cycler">启动CyclerFragment</string>
+    <string name="pop_to_newfreatures_fragment">popTo() NewFeatures Fragment</string>
+
     <string name="start_with_pop">启动启动CyclerFragment，并关闭自己</string>
     <string name="modify">修改上个页面的标题</string>
     <string name="settings">设置</string>

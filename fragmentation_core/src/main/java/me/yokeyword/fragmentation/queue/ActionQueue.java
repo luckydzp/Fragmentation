@@ -41,6 +41,7 @@ public class ActionQueue {
 
     private void enqueueAction(Action action) {
         mQueue.add(action);
+        //第一次进来的时候，执行完上局，队列只有一个，一旦进入handleAction，就会一直执行，直到队列为空
         if (mQueue.size() == 1) {
             handleAction();
         }
@@ -50,6 +51,10 @@ public class ActionQueue {
         if (mQueue.isEmpty()) return;
 
         Action action = mQueue.peek();
+        if (action == null || action.fragmentManager.isStateSaved()) {
+            mQueue.clear();
+            return;
+        }
         action.run();
 
         executeNextAction(action);

@@ -19,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentationMagician;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,7 +147,7 @@ public class DebugStackDelegate implements SensorEventListener {
     private List<DebugFragmentRecord> getFragmentRecords() {
         List<DebugFragmentRecord> fragmentRecordList = new ArrayList<>();
 
-        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(mActivity.getSupportFragmentManager());
+        List<Fragment> fragmentList = mActivity.getSupportFragmentManager().getFragments();
 
         if (fragmentList == null || fragmentList.size() < 1) return null;
 
@@ -183,7 +182,7 @@ public class DebugStackDelegate implements SensorEventListener {
     private List<DebugFragmentRecord> getChildFragmentRecords(Fragment parentFragment) {
         List<DebugFragmentRecord> fragmentRecords = new ArrayList<>();
 
-        List<Fragment> fragmentList = FragmentationMagician.getAddedFragments(parentFragment.getChildFragmentManager());
+        List<Fragment> fragmentList = parentFragment.getChildFragmentManager().getFragments();
         if (fragmentList == null || fragmentList.size() < 1) return null;
 
         for (int i = fragmentList.size() - 1; i >= 0; i--) {

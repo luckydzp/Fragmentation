@@ -9,7 +9,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentationMagician;
 
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
@@ -77,7 +76,7 @@ public class SupportActivityDelegate {
     public void setFragmentAnimator(FragmentAnimator fragmentAnimator) {
         this.mFragmentAnimator = fragmentAnimator;
 
-        for (Fragment fragment : FragmentationMagician.getAddedFragments(getSupportFragmentManager())) {
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             if (fragment instanceof ISupportFragment) {
                 ISupportFragment iF = (ISupportFragment) fragment;
                 SupportFragmentDelegate delegate = iF.getSupportDelegate();
@@ -146,7 +145,7 @@ public class SupportActivityDelegate {
      * 不建议复写该方法,请使用 {@link #onBackPressedSupport} 代替
      */
     public void onBackPressed() {
-        mTransactionDelegate.mActionQueue.enqueue(new Action(Action.ACTION_BACK) {
+        mTransactionDelegate.mActionQueue.enqueue(new Action(Action.ACTION_BACK,getSupportFragmentManager()) {
             @Override
             public void run() {
                 if (!mFragmentClickable) {

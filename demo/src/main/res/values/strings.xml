@@ -131,6 +131,7 @@
     <string name="btn_normal">Demo2: Similar to Instagram</string>
     <string name="btn_complicated">Demo3: Complicated nested</string>
     <string name="start_cycler">Start CyclerFragment</string>
+    <string name="pop_to_newfreatures_fragment">popTo() NewFeatures Fragment</string>
     <string name="start_with_pop">Start CyclerFragment, and finish self</string>
     <string name="modify">Modify Title</string>
     <string name="settings">Settings</string>
