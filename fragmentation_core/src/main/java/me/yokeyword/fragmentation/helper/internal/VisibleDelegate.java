@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.MessageQueue;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -97,8 +98,7 @@ public class VisibleDelegate {
     public void onPause() {
         //界面还没有执行到initVisible 发出的任务taskDispatchSupportVisible，界面就已经pause。
         //为了让下次resume 时候，能正常的执行需要设置mAbortInitVisible ，来确保在resume的时候，可以执行完整initVisible
-        if (mIdleDispatchSupportVisible != null) {
-            Looper.myQueue().removeIdleHandler(mIdleDispatchSupportVisible);
+        if (checkSetVisibleHandler()){
             mAbortInitVisible = true;
             return;
         }
@@ -120,6 +120,9 @@ public class VisibleDelegate {
             return;
         }
         if (hidden) {
+            if (checkSetVisibleHandler()){
+                mAbortInitVisible = true;
+            }
             dispatchSupportVisible(false);
         } else {
             safeDispatchUserVisibleHint(true);
@@ -151,21 +154,52 @@ public class VisibleDelegate {
         mIsOnceVisible = false;
     }
 
+
+    // daizhipeng修改 解决viewpager快速切换导致生命周失效的问题
+    // 快速切换可以出现以下情况
+    // page在的visible逻辑在队列中还未执行,此时调用page的invisible逻辑不成功(因page还未visible)
+    // 此时page visible成功后,配对的invisible已经错失
+
     public void setUserVisibleHint(boolean isVisibleToUser) {
+//        Log.d("sky-frg", "setUserVisibleHint1:" + isVisibleToUser);
         if (mFragment.isResumed() || (!mFragment.isAdded() && isVisibleToUser)) {
-            if (!mCurrentVisible && isVisibleToUser) {
-                safeDispatchUserVisibleHint(true);
-            } else if (mCurrentVisible && !isVisibleToUser) {
-                dispatchSupportVisible(false);
+//            Log.d("sky-frg", "setUserVisibleHint2:" + isVisibleToUser + " mCurrentVisible:" + mCurrentVisible);
+
+            if (isVisibleToUser) {
+                if (!mCurrentVisible) {
+//                    Log.d("sky-frg", "setUserVisibleHint3");
+                    safeDispatchUserVisibleHint(true);
+                }
+            } else {
+                if (mCurrentVisible) {
+                    dispatchSupportVisible(false);
+                } else if (checkSetVisibleHandler()){
+                    mAbortInitVisible = true;
+                }
+
             }
+
+
         }
     }
+
+    // daizhipeng修改 增加事件对列检测逻辑
+    // 当队列中有page visible handler时,删除
+    private boolean checkSetVisibleHandler() {
+        if (mIdleDispatchSupportVisible != null) {
+            Looper.myQueue().removeIdleHandler(mIdleDispatchSupportVisible);
+            mIdleDispatchSupportVisible = null;
+            return true;
+        }
+        return false;
+    }
+
 
     private void safeDispatchUserVisibleHint(boolean visible) {
 
         if (visible) {
             enqueueDispatchVisible();
-        }else {
+        } else {
             if (mIsOnceVisible) {
                 dispatchSupportVisible(false);
             }
@@ -173,6 +207,8 @@ public class VisibleDelegate {
     }
 
     private void enqueueDispatchVisible() {
+
+        checkSetVisibleHandler();
 
         mIdleDispatchSupportVisible = new MessageQueue.IdleHandler() {
             @Override
